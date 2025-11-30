@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('street');
 
             $table->string('password')->nullable()->change();
+            $table->index('first_name');
+            $table->index('last_name');
         });
     }
 

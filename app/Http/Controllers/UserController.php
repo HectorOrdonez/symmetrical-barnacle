@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\UserCreated;
 use App\Events\UserUpdated;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -61,7 +62,7 @@ class UserController extends Controller
         return redirect()->route('users.show', $user->id);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user): RedirectResponse
     {
         $validatedData = $request->validate([
             'first_name' => 'required|string|max:255',

@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\User;
 use Faker\Generator;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\UniqueConstraintViolationException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -14,14 +16,44 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $attempts = 0;
+
         // Admin
         $this->createAdmin();
 
-        for($i = 0; $i < 100; $i++)
+        $times = 1000;
+        for($i = 0; $i < $times; $i++)
         {
-            User::factory(10000)->create();
+            $users = [];
+            $batchSize = 1000;
 
-            dump('Batch of 10000 users created.');
+            for($j = 0; $j < $batchSize; $j++)
+            {
+                $users[] = [
+                    'first_name' => fake()->name,
+                    'last_name' => fake()->lastName,
+                    'email' => fake()->email . random_int(1, 10000),
+                    'country' => fake()->countryCode,
+                    'city' => fake()->city,
+                    'post_code' => fake()->postcode,
+                    'street' => fake()->streetAddress,
+                ];
+            }
+
+            try {
+                DB::table('users')->insert($users);
+            } catch (UniqueConstraintViolationException $e)
+            {
+                if($attempts > 3)
+                {
+                    dd('Could not finish seeding the database because of too many duplicate key exceptions.');
+                }
+
+                $attempts++;
+                dump('Skipped a batch because of duplicate key, attempting again.');
+            }
+
+            dump(sprintf('Batch of %d users created.', $batchSize));
         }
 
          User::factory()->create();
