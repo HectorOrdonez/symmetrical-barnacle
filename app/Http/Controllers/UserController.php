@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserCreated;
+use App\Events\UserUpdated;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -54,6 +56,8 @@ class UserController extends Controller
         $user->fill($validatedData);
         $user->save();
 
+        event(new UserCreated($user));
+
         return redirect()->route('users.show', $user->id);
     }
 
@@ -70,6 +74,8 @@ class UserController extends Controller
         ]);
 
         $user->update($validatedData);
+
+        event(new UserUpdated($user));
 
         return redirect()->route('users.show', $user->id);
     }

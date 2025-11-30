@@ -1,11 +1,7 @@
-I am Hector and this is my assessment for Nina Care.
+This is prepared to work with sail.
 
-TODO LIST
+You will need to seed the database and grab a coffee, it will take a while (as you probably are aware).
 
-DONE - Create 100 users to work with.
-DONE - Show this data.
-DONE - Add data to users: address, country etc... 
-DONE - Paginate this data.
-DONE - Users shown should be clickable and editable.
-DONE - New users
-- Search this data.
+The app is ready to register a new user if you want to do that, or you can use admin@ninacare.com || 12345
+
+The application works and the search functionality allows for filtering users by first or last name.

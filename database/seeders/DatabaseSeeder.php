@@ -17,7 +17,12 @@ class DatabaseSeeder extends Seeder
         // Admin
         $this->createAdmin();
 
-         User::factory(100)->create();
+        for($i = 0; $i < 100; $i++)
+        {
+            User::factory(10000)->create();
+
+            dump('Batch of 10000 users created.');
+        }
 
          User::factory()->create();
     }
@@ -27,12 +32,12 @@ class DatabaseSeeder extends Seeder
         $user = new User();
         $user->first_name = 'Super';
         $user->last_name = 'Admin';
-        $user->email = 'qwe@qwe.com';
+        $user->email = 'admin@ninacare.com';
         $user->country = 'NL';
         $user->city = 'Delft';
         $user->post_code = '12345';
         $user->street = 'Barrio Sesamo 12';
-        $user->password = Hash::make('qweqwe');
+        $user->password = Hash::make('12345');
 
         $user->save();
     }
