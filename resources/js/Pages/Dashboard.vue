@@ -25,7 +25,7 @@ import Pagination from '@/Components/Pagination.vue';
           <tbody>
           <tr v-for="user in users.data" :key="user.id">
             <td class="border-b border-gray-100 p-4 pl-8 text-gray-500 dark:border-gray-700 dark:text-gray-400">
-              {{ user.name }}
+              {{ user.first_name }}
             </td>
             <td class="border-b border-gray-100 p-4 pl-8 text-gray-500 dark:border-gray-700 dark:text-gray-400">
               {{ user.email }}
