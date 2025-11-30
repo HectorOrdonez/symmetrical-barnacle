@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('city');
             $table->string('post_code');
             $table->string('street');
+
+            $table->string('password')->nullable()->change();
         });
     }
 
@@ -29,6 +31,8 @@ return new class extends Migration
             $table->dropColumn('city');
             $table->dropColumn('post_code');
             $table->dropColumn('street');
+
+            $table->string('password')->nullable(false)->change();
         });
     }
 };

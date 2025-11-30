@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import {Head} from '@inertiajs/vue3';
+import {Head, Link} from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
 </script>
 
@@ -9,7 +9,13 @@ import Pagination from '@/Components/Pagination.vue';
 
   <AuthenticatedLayout>
 
+
     <div class="container max-w-4xl mx-auto p-4" v-if="users.data.length > 0">
+      <Link
+          :href="route('users.new')"
+          class="text-gray-300 hover:text-indigo-500 font-medium mb-4 block text-lg"
+      >Add new user</Link>
+
       <div class="rounded-xl bg-white/10 inset-ring-white/10 table-fixed">
         <table class="w-full table-auto border-collapse text-sm">
           <thead>

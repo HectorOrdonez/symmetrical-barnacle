@@ -9,6 +9,22 @@ use Inertia\Response;
 
 class UserController extends Controller
 {
+    public function new(): Response
+    {
+        $num = random_int(1, 10000);
+        return Inertia::render('Users/New', [
+            'user' => [
+                'first_name' => 'first name ' . $num,
+                'last_name' => 'last name' . $num,
+                'email' => 'email' . $num . '@dot.com',
+                'country' => 'NL',
+                'city' => 'Woah' . $num,
+                'post_code' => '1234' . $num,
+                'street' => 'Woah Street ' . $num,
+            ],
+        ]);
+    }
+
     public function show(User $user): Response
     {
         return Inertia::render('Users/Show', [
@@ -21,6 +37,24 @@ class UserController extends Controller
         return Inertia::render('Users/Edit', [
             'user' => $this->userToArray($user),
         ]);
+    }
+
+    public function store(Request $request, User $user)
+    {
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'country' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'post_code' => 'required|string|max:20',
+            'street' => 'required|string|max:255',
+        ]);
+
+        $user->fill($validatedData);
+        $user->save();
+
+        return redirect()->route('users.show', $user->id);
     }
 
     public function update(Request $request, User $user)
