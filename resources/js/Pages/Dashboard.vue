@@ -23,11 +23,16 @@ import Pagination from '@/Components/Pagination.vue';
           </tr>
           </thead>
           <tbody>
-          <tr v-for="user in users.data" :key="user.id">
-            <td class="border-b border-gray-100 p-4 pl-8 text-gray-500 dark:border-gray-700 dark:text-gray-400">
+          <tr
+              class="cursor-pointer border-b border-gray-100 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-500 hover:text-gray-900"
+              v-for="user in users.data"
+              :key="user.id"
+              @click="goToUser(user.id)"
+          >
+            <td class="pl-8">
               {{ user.first_name }}
             </td>
-            <td class="border-b border-gray-100 p-4 pl-8 text-gray-500 dark:border-gray-700 dark:text-gray-400">
+            <td>
               {{ user.email }}
             </td>
           </tr>
@@ -48,7 +53,13 @@ import Pagination from '@/Components/Pagination.vue';
 export default {
   props: {
     users: Object,
+  },
+  methods: {
+    goToUser(userId) {
+      this.$inertia.get('/users/' + userId);
+    }
   }
 };
+
 
 </script>
