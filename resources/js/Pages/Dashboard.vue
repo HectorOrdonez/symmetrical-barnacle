@@ -1,22 +1,50 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
-</script>
+import {Head} from '@inertiajs/vue3';</script>
 
 <template>
-    <Head title="Dashboard" />
+  <Head title="Dashboard"/>
 
-    <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>
-        </template>
+  <AuthenticatedLayout>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900 dark:text-gray-100">You're logged in!</div>
-                </div>
-            </div>
-        </div>
-    </AuthenticatedLayout>
+    <div class="container max-w-4xl mx-auto p-4" v-if="users.length > 0">
+      <div class="rounded-xl bg-white/10 inset-ring-white/10 table-fixed">
+        <table class="w-full table-auto border-collapse text-sm">
+          <thead>
+          <tr>
+            <th class="border-b border-gray-200 p-4 pb-3 pl-8 text-left font-medium text-gray-400 dark:border-gray-600 dark:text-gray-200">
+              Name
+            </th>
+            <th class="border-b border-gray-200 p-4 pb-3 pl-8 text-left font-medium text-gray-400 dark:border-gray-600 dark:text-gray-200">
+              Email
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="user in users" :key="user.id">
+            <td class="border-t border-gray-100 p-4 pl-8 text-gray-500 dark:border-gray-700 dark:text-gray-400">
+              {{ user.name }}
+            </td>
+            <td class="border-t border-gray-100 p-4 pl-8 text-gray-500 dark:border-gray-700 dark:text-gray-400">
+              {{ user.email }}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div v-else>
+      <p>No users found. This should be an impossible text to read.</p>
+    </div>
+
+  </AuthenticatedLayout>
 </template>
+
+<script>
+export default {
+  props: {
+    users: Array,
+  }
+};
+
+</script>
