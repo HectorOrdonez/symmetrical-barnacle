@@ -4,7 +4,8 @@ TODO LIST
 
 DONE - Create 100 users to work with.
 DONE - Show this data.
-- Add data to users: address, country etc... 
+DONE - Add data to users: address, country etc... 
 DONE - Paginate this data.
+DONE - Users shown should be clickable and editable.
+- New users
 - Search this data.
-- Users shown should be clickable and editable.

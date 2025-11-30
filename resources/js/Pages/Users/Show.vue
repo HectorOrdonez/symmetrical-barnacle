@@ -20,6 +20,10 @@ import {Head} from '@inertiajs/vue3';</script>
         <p class="text-lg"><strong>Postcode:</strong> {{ user.post_code }}</p>
         <p class="text-lg"><strong>Street:</strong> {{ user.street }}</p>
 
+        <button @click="edit()" class="mt-6 mr-3 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-indigo-500">
+          Edit
+        </button>
+
         <button @click="goBack" class="mt-6 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-indigo-500">
           Go Back
         </button>
@@ -35,8 +39,11 @@ export default {
     user: Object,
   },
   methods: {
+    edit() {
+      this.$inertia.get('/users/' + this.user.id + '/edit');
+    },
     goBack() {
-      window.history.back(); // Go back to the previous page
+      this.$inertia.get('/dashboard');
     }
   }
 }
