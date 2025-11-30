@@ -7,5 +7,5 @@ DONE - Show this data.
 DONE - Add data to users: address, country etc... 
 DONE - Paginate this data.
 DONE - Users shown should be clickable and editable.
-- New users
+DONE - New users
 - Search this data.
