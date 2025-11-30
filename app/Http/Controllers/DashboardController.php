@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $users = User::query()->get();
+        $users = User::paginate(50);
 
         return Inertia::render('Dashboard', [
             'users' => $users,
